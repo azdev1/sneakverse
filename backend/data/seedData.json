@@ -1,0 +1,206 @@
+{
+  "products": [
+    {
+      "name": "SneakVerse Quantum",
+      "brand": "SneakVerse",
+      "category": "Running Shoes",
+      "description": "Step into the next dimension of comfort and performance. The SneakVerse Quantum features reactive mesh uppers, a cybernetic support frame, and our proprietary energy-returning cushion sole. Optimized for daily running and futuristic styling.",
+      "price": 220,
+      "rating": 4.8,
+      "numReviews": 3,
+      "image": "/uploads/sneaker-quantum.png",
+      "images": ["/uploads/sneaker-quantum-1.png", "/uploads/sneaker-quantum-2.png"],
+      "sizes": [7, 8, 9, 10, 11, 12],
+      "colors": [
+        { "name": "Cyber Obsidian", "hex": "#0a0a0a" },
+        { "name": "Neon Blue", "hex": "#00f0ff" },
+        { "name": "Neon Orange", "hex": "#ff5500" },
+        { "name": "Titanium Silver", "hex": "#c0c0c0" }
+      ],
+      "stock": 15,
+      "isFeatured": true,
+      "featuredImage": "/uploads/sneaker-quantum-featured.png",
+      "specs": {
+        "Weight": "280g",
+        "Midsole Drop": "8mm",
+        "Upper Material": "QuantumMesh Engine v2",
+        "Sole Tech": "AeroFoam Reactive Cushioning"
+      },
+      "reviews": [
+        {
+          "name": "Alex Mercer",
+          "rating": 5,
+          "comment": "Absolutely incredible. The aesthetic is out of this world and they feel like walking on clouds.",
+          "createdAt": "2026-05-10T10:00:00Z"
+        },
+        {
+          "name": "Sarah Connor",
+          "rating": 4,
+          "comment": "Super comfortable sole, although the laces fit slightly tighter than expected. Definitely worth it.",
+          "createdAt": "2026-05-15T14:30:00Z"
+        },
+        {
+          "name": "Neo",
+          "rating": 5,
+          "comment": "It's like they were designed in the Matrix. Fits perfectly and looks unreal under dark light.",
+          "createdAt": "2026-05-20T08:15:00Z"
+        }
+      ]
+    },
+    {
+      "name": "AeroStratus Basketball",
+      "brand": "SneakVerse",
+      "category": "Basketball Shoes",
+      "description": "Defy gravity on the court. Engineered with high-top ankle locking collars, carbon fiber stabilizers, and multi-directional herringbone grip soles. Renders premium impact protection on heavy landings.",
+      "price": 260,
+      "rating": 4.9,
+      "numReviews": 2,
+      "image": "/uploads/sneaker-aerostratus.png",
+      "images": ["/uploads/sneaker-aerostratus-1.png"],
+      "sizes": [8, 9, 10, 11, 12, 13],
+      "colors": [
+        { "name": "Pure Metallic White", "hex": "#ffffff" },
+        { "name": "Hyper Crimson", "hex": "#ff0033" },
+        { "name": "Voltage Purple", "hex": "#7a00ff" },
+        { "name": "Gold Accent", "hex": "#ffd700" }
+      ],
+      "stock": 8,
+      "isFeatured": true,
+      "featuredImage": "/uploads/sneaker-aerostratus-featured.png",
+      "specs": {
+        "Support Type": "High-top Lockoutout",
+        "Shank Plate": "3D Carbon Fiber Plate",
+        "Outsole": "Herringbone Wet-Grip Rubber",
+        "Cushioning": "Stratus Cushion pods"
+      },
+      "reviews": [
+        {
+          "name": "LeBron J.",
+          "rating": 5,
+          "comment": "The ankle lockdown on these is better than any basketball shoes I have worn this season.",
+          "createdAt": "2026-04-12T11:22:00Z"
+        },
+        {
+          "name": "Jordan Carter",
+          "rating": 5,
+          "comment": "Clean design, elite traction, and the customizer lets me color match my team jersey perfectly.",
+          "createdAt": "2026-04-18T16:40:00Z"
+        }
+      ]
+    },
+    {
+      "name": "HyperNebula Limited Edition",
+      "brand": "SneakVerse",
+      "category": "Limited Editions",
+      "description": "A collector's item crafted for the streets. Features premium full-grain leather, holographic panels, and glow-in-the-dark sole highlights. Limited to 500 pairs worldwide.",
+      "price": 380,
+      "rating": 5.0,
+      "numReviews": 2,
+      "image": "/uploads/sneaker-hypernebula.png",
+      "images": [],
+      "sizes": [8, 9, 10, 11, 12],
+      "colors": [
+        { "name": "Deep Obsidian", "hex": "#121212" },
+        { "name": "Nebula Green", "hex": "#39ff14" },
+        { "name": "Glow Yellow", "hex": "#e0fe00" }
+      ],
+      "stock": 3,
+      "isFeatured": true,
+      "featuredImage": "/uploads/sneaker-hypernebula-featured.png",
+      "specs": {
+        "Limited Quantity": "#147 / 500",
+        "Leather Quality": "Full-grain Nappa",
+        "Reflectivity": "3M Holographic side panels",
+        "Lacing": "Dual-tension speed system"
+      },
+      "reviews": [
+        {
+          "name": "Hypebeast99",
+          "rating": 5,
+          "comment": "Slept outside the website release for these, but so happy they're here. The neon glow is insane.",
+          "createdAt": "2026-05-01T00:05:00Z"
+        },
+        {
+          "name": "Sophia Martinez",
+          "rating": 5,
+          "comment": "Absolute masterpiece of footwear. Premium materials are noticeable the second you open the box.",
+          "createdAt": "2026-05-03T10:14:00Z"
+        }
+      ]
+    },
+    {
+      "name": "ApexRunner Pro",
+      "brand": "SneakVerse",
+      "category": "Sports Collection",
+      "description": "Ultra-lightweight racer built for record breaking speed. Features single-thread weave uppers, extreme rocker geometry for forward propulsion, and laser-carved sole weights.",
+      "price": 210,
+      "rating": 4.6,
+      "numReviews": 1,
+      "image": "/uploads/sneaker-apex.png",
+      "images": [],
+      "sizes": [7, 8, 9, 10, 11],
+      "colors": [
+        { "name": "Cyber Green", "hex": "#00ff66" },
+        { "name": "Volt Yellow", "hex": "#ccff00" },
+        { "name": "Pitch Black", "hex": "#000000" }
+      ],
+      "stock": 20,
+      "isFeatured": false,
+      "featuredImage": "",
+      "specs": {
+        "Weight": "165g (Ultra-Light)",
+        "Upper Mesh": "Mono-filament Weave v3",
+        "Rocker Angle": "12 degrees propulsion",
+        "Traction": "Wet-grip razor rubber"
+      },
+      "reviews": [
+        {
+          "name": "Emma Watson",
+          "rating": 4,
+          "comment": "Crazy light. It feels like you are running barefoot but with incredible forward spring. Fits narrow.",
+          "createdAt": "2026-05-18T15:20:00Z"
+        }
+      ]
+    },
+    {
+      "name": "RetroVibe Cyberpunk",
+      "brand": "SneakVerse",
+      "category": "Casual Sneakers",
+      "description": "Nostalgic silhouette meets future street tech. Distressed leather combined with neon contrast stitching, exposed foam tongues, and vintage gum midsoles. Essential daily wear.",
+      "price": 175,
+      "rating": 4.7,
+      "numReviews": 2,
+      "image": "/uploads/sneaker-retrovibe.png",
+      "images": [],
+      "sizes": [6, 7, 8, 9, 10, 11, 12],
+      "colors": [
+        { "name": "Cyberpunk Pink", "hex": "#ff007f" },
+        { "name": "Gum Retro White", "hex": "#f5f5dc" },
+        { "name": "Matte Charcoal", "hex": "#2b2b2b" }
+      ],
+      "stock": 25,
+      "isFeatured": false,
+      "featuredImage": "",
+      "specs": {
+        "Upper Material": "Distressed Suede & Nylon",
+        "Lining": "Breathable Terry Cotton",
+        "Midsole": "Vintage Textured PU Rubber",
+        "Insole": "Ortholite High Recovery Foam"
+      },
+      "reviews": [
+        {
+          "name": "Marcus Aurelius",
+          "rating": 5,
+          "comment": "Perfect casual shoe. Pairs with joggers or denim easily. Colorways are extremely retro.",
+          "createdAt": "2026-04-20T12:00:00Z"
+        },
+        {
+          "name": "Lana Wachowski",
+          "rating": 4,
+          "comment": "Comfortable from day one. High style quotient. The neon accents are super cool.",
+          "createdAt": "2026-04-25T19:10:00Z"
+        }
+      ]
+    }
+  ]
+}
