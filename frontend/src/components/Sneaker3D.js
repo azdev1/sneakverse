@@ -9,26 +9,39 @@ export default function Sneaker3D({
   soleColor = '#00f0ff',
   lacesColor = '#ffffff',
   swooshColor = '#ff5500',
-  autoRotate = true
+  autoRotate = true,
 }) {
   const groupRef = useRef();
 
-  const { scene } = useGLTF(
-    '/models/arnt_shoes_-_ulv_whussuphaterz.glb'
-  );
+  const { scene } = useGLTF('/models/adidas_sneakers.glb');
 
   useEffect(() => {
     scene.traverse((child) => {
-      if (child.isMesh) {
-        console.log(
-          'Mesh:',
-          child.name,
-          'Material:',
-          child.material?.name
-        );
+      if (!child.isMesh || !child.material) return;
+
+      child.material = child.material.clone();
+
+      // Main shoe body
+      if (child.material.name === 'Material_40') {
+        child.material.color.set(bodyColor);
+      }
+
+      // Adidas stripes
+      if (child.material.name === 'Material_42') {
+        child.material.color.set(swooshColor);
+      }
+
+      // Laces
+      if (child.material.name === 'Material_32') {
+        child.material.color.set(lacesColor);
+      }
+
+      // Side pod block
+      if (child.material.name === 'Material_33') {
+        child.material.color.set(soleColor);
       }
     });
-  }, [scene]);
+  }, [scene, bodyColor, soleColor, lacesColor, swooshColor]);
 
   useFrame((state) => {
     if (!groupRef.current) return;
@@ -54,6 +67,4 @@ export default function Sneaker3D({
   );
 }
 
-useGLTF.preload(
-  '/models/arnt_shoes_-_ulv_whussuphaterz.glb'
-);
+useGLTF.preload('/models/adidas_sneakers.glb');

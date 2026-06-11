@@ -2,15 +2,15 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { 
-  ArrowRight, 
-  RotateCw, 
-  Settings, 
-  Maximize2, 
-  Compass, 
-  Activity, 
-  Zap, 
-  Sparkles 
+import {
+  ArrowRight,
+  RotateCw,
+  Settings,
+  Maximize2,
+  Compass,
+  Activity,
+  Zap,
+  Sparkles
 } from 'lucide-react';
 import Canvas3D from '../components/Canvas3D';
 import ProductCard from '../components/ProductCard';
@@ -122,13 +122,13 @@ export default function Home() {
   return (
     <>
       {isLoading && <Loader />}
-      
+
       <div className="w-full flex flex-col min-h-screen">
-        
+
         {/* HERO SECTION */}
         <section className="relative w-full min-h-[calc(100vh-4rem)] flex items-center bg-radial from-gray-900/30 to-[#030303] overflow-hidden px-4 sm:px-6 lg:px-8 py-10">
           <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
-            
+
             {/* Left Info Panel */}
             <div className="lg:col-span-5 flex flex-col space-y-6">
               <motion.div
@@ -164,13 +164,12 @@ export default function Home() {
                     <Settings size={14} className="text-accent animate-spin-slow" />
                     <span>Real-time Customizer</span>
                   </div>
-                  <button 
+                  <button
                     onClick={() => setAutoRotate(!autoRotate)}
-                    className={`p-1.5 rounded-md border text-xs flex items-center gap-1 transition-all ${
-                      autoRotate 
-                        ? 'bg-accent/25 border-accent text-accent' 
-                        : 'border-white/10 text-gray-400 hover:text-white'
-                    }`}
+                    className={`p-1.5 rounded-md border text-xs flex items-center gap-1 transition-all ${autoRotate
+                      ? 'bg-accent/25 border-accent text-accent'
+                      : 'border-white/10 text-gray-400 hover:text-white'
+                      }`}
                   >
                     <RotateCw size={12} className={autoRotate ? 'animate-spin' : ''} />
                     <span className="text-[10px] font-bold">Spin</span>
@@ -183,13 +182,18 @@ export default function Home() {
                   <div className="space-y-1">
                     <label className="text-[10px] text-gray-500 font-bold uppercase">Main Upper Body</label>
                     <div className="flex gap-1.5">
-                      {['#0a0a0a', '#1e293b', '#64748b', '#dc2626'].map(color => (
-                        <button
-                          key={color}
-                          onClick={() => setBodyColor(color)}
-                          className={`w-5 h-5 rounded-full border ${bodyColor === color ? 'border-accent scale-110' : 'border-white/10'}`}
-                          style={{ backgroundColor: color }}
-                        />
+                      {[
+                        '#0a0a0a',
+                        '#ffffff',
+                        '#1e293b',
+                        '#64748b',
+                        '#dc2626'
+                      ].map(color => (<button
+                        key={color}
+                        onClick={() => setBodyColor(color)}
+                        className={`w-5 h-5 rounded-full border ${bodyColor === color ? 'border-accent scale-110' : 'border-white/10'}`}
+                        style={{ backgroundColor: color }}
+                      />
                       ))}
                     </div>
                   </div>
@@ -198,7 +202,13 @@ export default function Home() {
                   <div className="space-y-1">
                     <label className="text-[10px] text-gray-500 font-bold uppercase">Midsole Pods</label>
                     <div className="flex gap-1.5">
-                      {['#00f0ff', '#a855f7', '#10b981', '#ffffff'].map(color => (
+                      {[
+                        '#000000',
+                        '#ffffff',
+                        '#00f0ff',
+                        '#a855f7',
+                        '#10b981'
+                      ].map(color => (
                         <button
                           key={color}
                           onClick={() => setSoleColor(color)}
@@ -213,7 +223,14 @@ export default function Home() {
                   <div className="space-y-1">
                     <label className="text-[10px] text-gray-500 font-bold uppercase">Side Swoosh Accent</label>
                     <div className="flex gap-1.5">
-                      {['#ff5500', '#ffd700', '#ff007f', '#00ff66'].map(color => (
+                      {[
+                        '#000000',
+                        '#ffffff',
+                        '#ff5500',
+                        '#ffd700',
+                        '#ff007f',
+                        '#00ff66'
+                      ].map(color => (
                         <button
                           key={color}
                           onClick={() => setSwooshColor(color)}
@@ -223,12 +240,20 @@ export default function Home() {
                       ))}
                     </div>
                   </div>
-
                   {/* Laces Color */}
                   <div className="space-y-1">
-                    <label className="text-[10px] text-gray-500 font-bold uppercase">Physical Laces</label>
+                    <label className="text-[10px] text-gray-500 font-bold uppercase">
+                      Physical Laces
+                    </label>
                     <div className="flex gap-1.5">
-                      {['#ffffff', '#000000', '#ccff00', '#ff0033'].map(color => (
+                      {[
+                        '#ffffff', // white
+                        '#000000', // black
+                        '#ccff00', // lime
+                        '#ff0033', // red
+                        '#00f0ff'  // cyan
+                      ].map(color => (
+
                         <button
                           key={color}
                           onClick={() => setLacesColor(color)}
@@ -251,11 +276,10 @@ export default function Home() {
                           setCameraPreset(preset);
                           setAutoRotate(false); // Stop spin for preset inspection
                         }}
-                        className={`py-1 rounded text-[10px] font-black uppercase tracking-wider border transition-all ${
-                          cameraPreset === preset 
-                            ? 'bg-accent text-black border-accent' 
-                            : 'border-white/5 text-gray-400 hover:text-white hover:bg-white/5'
-                        }`}
+                        className={`py-1 rounded text-[10px] font-black uppercase tracking-wider border transition-all ${cameraPreset === preset
+                          ? 'bg-accent text-black border-accent'
+                          : 'border-white/5 text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
                       >
                         {preset}
                       </button>
@@ -278,7 +302,7 @@ export default function Home() {
                   <span>Explore Collection</span>
                   <ArrowRight size={14} />
                 </a>
-                
+
                 <Link
                   href="/shop"
                   className="py-3 px-6 rounded-full glass hover:bg-white/5 border-white/10 text-white font-extrabold text-xs tracking-widest uppercase transition-all"
@@ -300,7 +324,7 @@ export default function Home() {
                 <span className="text-white font-black text-xs uppercase tracking-widest">SNEAKVERSE Custom R3F Engine</span>
                 <span className="text-[10px] text-gray-500 font-bold uppercase mt-0.5">Drag to rotate • Scroll to zoom</span>
               </div>
-              
+
               <div className="absolute bottom-4 right-6 z-10 flex gap-2 items-center pointer-events-none">
                 <Maximize2 size={12} className="text-gray-500" />
                 <span className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">3D Renderer V1.4.0</span>
@@ -344,7 +368,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-base font-black uppercase text-white tracking-wide">{cat.name}</h3>
                   <p className="text-xs text-gray-400 font-medium mt-1">{cat.count}</p>
-                  
+
                   <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold text-accent group-hover:translate-x-1.5 transition-transform duration-300 uppercase tracking-widest">
                     <span>Enter Category</span>
                     <ArrowRight size={10} />
@@ -364,8 +388,8 @@ export default function Home() {
                 <h2 className="text-3xl font-black uppercase tracking-tight text-white">Featured Drops</h2>
                 <div className="w-12 h-[2px] bg-accent mt-2" />
               </div>
-              <Link 
-                href="/shop" 
+              <Link
+                href="/shop"
                 className="text-xs font-black uppercase text-gray-400 hover:text-accent tracking-widest flex items-center gap-1.5 transition-colors self-start"
               >
                 <span>View Full Catalog</span>

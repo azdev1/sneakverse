@@ -1,11 +1,11 @@
 'use client';
+
 import React, { Suspense, useEffect } from 'react';
 import { Canvas, useThree } from '@react-three/fiber';
 import { OrbitControls, ContactShadows } from '@react-three/drei';
 import Sneaker3D from './Sneaker3D';
 import * as THREE from 'three';
 
-// Sub-component to manage smooth camera preset movements
 function CameraController({ cameraPreset }) {
   const { camera } = useThree();
 
@@ -19,10 +19,8 @@ function CameraController({ cameraPreset }) {
 
     const target = positions[cameraPreset] || positions.side;
 
-    // Animate camera position smoothly using GSAP or simple interval.
-    // To remain lightweight and vanilla, we can animate it over a brief transition frame using let/interval
     let steps = 0;
-    const duration = 25; // 25 frames (approx 300ms)
+    const duration = 25;
 
     const startX = camera.position.x;
     const startY = camera.position.y;
@@ -35,18 +33,21 @@ function CameraController({ cameraPreset }) {
     const animateCamera = () => {
       if (steps < duration) {
         steps++;
+
         const progress = steps / duration;
-        // EaseInOutQuad interpolation
-        const ease = progress < 0.5
-          ? 2 * progress * progress
-          : -1 + (4 - 2 * progress) * progress;
+        const ease =
+          progress < 0.5
+            ? 2 * progress * progress
+            : -1 + (4 - 2 * progress) * progress;
 
         camera.position.set(
           startX + diffX * ease,
           startY + diffY * ease,
           startZ + diffZ * ease
         );
+
         camera.lookAt(new THREE.Vector3(...target.look));
+
         requestAnimationFrame(animateCamera);
       }
     };
@@ -73,10 +74,8 @@ export default function Canvas3D({
         gl={{ antialias: true, preserveDrawingBuffer: true }}
         className="w-full h-full cursor-grab active:cursor-grabbing"
       >
-        {/* Strong Ambient Fill Light */}
         <ambientLight intensity={1.4} />
 
-        {/* High-intensity Key Spotlight */}
         <spotLight
           position={[6, 12, 6]}
           angle={0.4}
@@ -86,38 +85,38 @@ export default function Canvas3D({
           shadow-mapSize={[1024, 1024]}
         />
 
-        {/* Front Directional Light for clear details */}
         <directionalLight
           position={[4, 5, 8]}
-          intensity={6.0}
+          intensity={6}
           castShadow
           shadow-mapSize={[2048, 2048]}
         />
 
-        {/* Back Fill Light for counter silhouette rendering */}
         <directionalLight
           position={[-6, 6, -6]}
-          intensity={4.0}
+          intensity={4}
           color="#ffffff"
         />
 
-        {/* Vivid bottom underglow matching customized sole color */}
         <pointLight
           position={[0, -1.2, 0]}
           color={soleColor || '#00f0ff'}
-          intensity={8.0}
+          intensity={8}
           distance={4.5}
         />
 
-
-        {/* Sneaker Mesh */}
         <Suspense fallback={null}>
           <group position={[0, 0.2, 0]}>
-            <Sneaker3D autoRotate={autoRotate} />
+            <Sneaker3D
+              bodyColor={bodyColor}
+              soleColor={soleColor}
+              lacesColor={lacesColor}
+              swooshColor={swooshColor}
+              autoRotate={autoRotate}
+            />
           </group>
         </Suspense>
 
-        {/* Realistic ground shadow */}
         <ContactShadows
           position={[0, -0.6, 0]}
           opacity={0.7}
@@ -126,16 +125,14 @@ export default function Canvas3D({
           far={1.5}
         />
 
-        {/* Camera Preset Handler */}
         <CameraController cameraPreset={cameraPreset} />
 
-        {/* Interactive Controls */}
         <OrbitControls
-          enableZoom={true}
+          enableZoom
           enablePan={false}
           minDistance={2.5}
           maxDistance={7}
-          maxPolarAngle={Math.PI / 2 + 0.1} // Prevent looking completely under ground
+          maxPolarAngle={Math.PI / 2 + 0.1}
           minPolarAngle={0.1}
           makeDefault
         />
