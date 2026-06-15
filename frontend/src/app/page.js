@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import {
@@ -16,6 +15,7 @@ import Canvas3D from '../components/Canvas3D';
 import ProductCard from '../components/ProductCard';
 import Loader from '../components/Loader';
 import Link from 'next/link';
+import { useCart } from '../context/CartContext';
 
 const FALLBACK_PRODUCTS = [
   {
@@ -90,6 +90,32 @@ export default function Home() {
   const [swooshColor, setSwooshColor] = useState('#ff5500');
   const [cameraPreset, setCameraPreset] = useState('side');
   const [autoRotate, setAutoRotate] = useState(true);
+  const { addToCart } = useCart();
+
+  const handleAddCustomSneaker = () => {
+    const customSneaker = {
+      _id: 'custom-sneaker',
+      name: 'Custom SneakVerse',
+      image: '/uploads/sneaker-quantum.png',
+      price: 220,
+      stock: 99
+    };
+
+    addToCart(
+      customSneaker,
+      1,
+      'Custom',
+      {
+        name: 'Custom Design',
+        bodyColor,
+        soleColor,
+        swooshColor,
+        lacesColor
+      }
+    );
+
+    alert('Custom sneaker added to cart!');
+  };
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -161,7 +187,6 @@ export default function Home() {
               >
                 <div className="flex items-center justify-between border-b border-white/5 pb-2.5">
                   <div className="flex items-center gap-1.5 text-xs text-white font-bold uppercase tracking-wider">
-                    <Settings size={14} className="text-accent animate-spin-slow" />
                     <span>Real-time Customizer</span>
                   </div>
                   <button
@@ -286,6 +311,13 @@ export default function Home() {
                     ))}
                   </div>
                 </div>
+                <button
+                  onClick={handleAddCustomSneaker}
+                  className="w-full mt-4 py-3 rounded-xl bg-accent text-black font-black uppercase tracking-wider hover:scale-105 transition-all"
+                >
+                  Add Customized Shoe To Cart
+                </button>
+
               </motion.div>
 
               {/* Action buttons */}
@@ -412,4 +444,3 @@ export default function Home() {
     </>
   );
 }
-

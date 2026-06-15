@@ -1,4 +1,7 @@
 'use client';
+import { Canvas } from '@react-three/fiber';
+import { OrbitControls } from '@react-three/drei';
+import ProductModel from './ProductModel';
 
 import React, { useState } from 'react';
 import Link from 'next/link';
@@ -13,6 +16,13 @@ export default function ProductCard({ product }) {
   const [activeColor, setActiveColor] = useState(product.colors[0] || { name: 'Default', hex: '#000000' });
   const [isHovered, setIsHovered] = useState(false);
   const [coords, setCoords] = useState({ x: 0, y: 0 });
+  const modelMap = {
+    "SneakVerse Quantum": "/models/rtfkt_creator_one.glb",
+    "AeroStratus Basketball": "/models/basketball_shoe.glb",
+    "HyperNebula Limited Edition": "/models/free_shoe_model.glb"
+  };
+
+
 
   // Tilt event tracking
   const handleMouseMove = (e) => {
@@ -88,21 +98,34 @@ export default function ProductCard({ product }) {
           />
 
           {/* Procedural sneaker shape */}
-          <div className="w-32 h-14 bg-gradient-to-r from-gray-700 to-gray-800 rounded-tr-[40px] rounded-bl-[15px] relative shadow-lg transform -rotate-12 group-hover:-rotate-6 group-hover:scale-110 transition-all duration-500">
-            {/* Sole block */}
-            <div
-              className="absolute -bottom-2 -left-1 -right-1 h-3 rounded-b-[8px] transition-all duration-300 border-t border-white/10"
-              style={{ backgroundColor: activeColor.hex }}
-            />
-            {/* Laces block decoration */}
-            <div className="absolute top-1 left-8 w-8 h-2 border-t-2 border-dashed border-white/40 transform rotate-12" />
-            {/* Accent stripe representing customizable options */}
-            <div className="absolute top-4 left-4 right-4 h-3 bg-black/40 rounded-full" />
-          </div>
+          <div className="h-44 w-full relative rounded-xl overflow-hidden">
 
-          <span className="text-[9px] font-black text-white/30 uppercase tracking-[0.2em] absolute bottom-2">
-            Dynamic Customizer Enabled
-          </span>
+            <Canvas camera={{ position: [0, 0.5, 3], fov: 35 }}>
+
+              <ambientLight intensity={2} />
+
+              <directionalLight
+                position={[5, 5, 5]}
+                intensity={3}
+              />
+
+              {console.log("NAME:", product.name)}
+              <ProductModel
+                modelPath={modelMap[product.name]}
+                productName={product.name}
+              />
+
+
+              <OrbitControls
+                enableZoom={false}
+                enablePan={false}
+                autoRotate
+                autoRotateSpeed={2}
+              />
+
+            </Canvas>
+
+          </div>
         </div>
 
         {/* Sneaker name & rating */}
