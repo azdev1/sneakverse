@@ -109,11 +109,12 @@ export default function ProductCard({ product }) {
                 intensity={3}
               />
 
-              {console.log("NAME:", product.name)}
-              <ProductModel
-                modelPath={modelMap[product.name]}
-                productName={product.name}
-              />
+              {modelMap[product.name] && (
+                <ProductModel
+                  modelPath={modelMap[product.name]}
+                  productName={product.name}
+                />
+              )}
 
 
               <OrbitControls
