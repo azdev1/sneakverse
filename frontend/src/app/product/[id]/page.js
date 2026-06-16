@@ -2,16 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { 
-  Star, 
-  ShoppingBag, 
-  Heart, 
-  Info, 
-  MessageSquare, 
-  ArrowLeft, 
+import {
+  Star,
+  ShoppingBag,
+  Heart,
+  Info,
+  MessageSquare,
+  ArrowLeft,
   RotateCw,
   Plus,
-  Maximize2
+  Maximize2,
+  Settings
 } from 'lucide-react';
 import Canvas3D from '../../../components/Canvas3D';
 import ProductCard from '../../../components/ProductCard';
@@ -26,6 +27,8 @@ const FALLBACK_PRODUCTS = [
     name: "SneakVerse Quantum",
     brand: "SneakVerse",
     category: "Running Shoes",
+    model: "/models/rtfkt_creator_one.glb",
+
     description: "Step into the next dimension of comfort and performance. The SneakVerse Quantum features reactive mesh uppers, a cybernetic support frame, and our proprietary energy-returning cushion sole.",
     price: 220,
     rating: 4.8,
@@ -56,6 +59,8 @@ const FALLBACK_PRODUCTS = [
     name: "AeroStratus Basketball",
     brand: "SneakVerse",
     category: "Basketball Shoes",
+    model: "/models/basketball_shoe.glb",
+
     description: "Defy gravity on the court. Engineered with high-top ankle locking collars, carbon fiber stabilizers, and multi-directional herringbone grip.",
     price: 260,
     rating: 4.9,
@@ -82,6 +87,8 @@ const FALLBACK_PRODUCTS = [
     name: "HyperNebula Limited Edition",
     brand: "SneakVerse",
     category: "Limited Editions",
+    model: "/models/free_shoe_model.glb",
+
     description: "A collector's item crafted for the streets. Features premium full-grain leather, holographic panels, and glow-in-the-dark highlights.",
     price: 380,
     rating: 5.0,
@@ -141,7 +148,7 @@ export default function ProductDetails() {
         const res = await fetch(`http://localhost:5000/api/products/${id}`);
         if (!res.ok) throw new Error('Product not found');
         const data = await res.json();
-        
+
         setProduct(data);
         setupDefaults(data);
         fetchRelated(data.category);
@@ -161,7 +168,7 @@ export default function ProductDetails() {
   const setupDefaults = (data) => {
     setSelectedSize(data.sizes[0] || 9);
     setSelectedColor(data.colors[0] || { name: 'Default', hex: '#000000' });
-    
+
     // Feed colors into the 3D model customizer
     setBodyColor(data.colors[0]?.hex || '#0a0a0a');
     setSoleColor(data.colors[1]?.hex || '#00f0ff');
@@ -197,7 +204,7 @@ export default function ProductDetails() {
       alert('Please login to leave a review.');
       return;
     }
-    
+
     try {
       const response = await fetch(`http://localhost:5000/api/products/${id}/reviews`, {
         method: 'POST',
@@ -231,7 +238,7 @@ export default function ProductDetails() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-16">
-      
+
       {/* Back to shop link */}
       <div>
         <Link href="/shop" className="inline-flex items-center gap-2 text-xs font-bold text-gray-400 hover:text-accent uppercase tracking-wider transition-colors">
@@ -242,11 +249,11 @@ export default function ProductDetails() {
 
       {/* Main product customization workspace */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
+
         {/* LEFT COLUMN: INTERACTIVE 3D VIEWER (7 Columns) */}
         <div className="lg:col-span-7 flex flex-col space-y-6">
           <div className="h-[380px] sm:h-[480px] w-full relative group border border-white/5 rounded-3xl glass shadow-2xl flex items-center justify-center">
-            
+
             {/* Canvas overlay callouts */}
             <div className="absolute top-4 left-6 z-10 flex flex-col pointer-events-none">
               <span className="text-white font-black text-xs uppercase tracking-widest">{product.name} 3D View</span>
@@ -260,6 +267,7 @@ export default function ProductDetails() {
 
             {/* R3F Canvas */}
             <Canvas3D
+              modelPath={product.model}
               bodyColor={bodyColor}
               soleColor={soleColor}
               lacesColor={lacesColor}
@@ -276,13 +284,12 @@ export default function ProductDetails() {
                 <Settings size={14} className="text-accent animate-spin-slow" />
                 Customize Material Shader Colors
               </h3>
-              <button 
+              <button
                 onClick={() => setAutoRotate(!autoRotate)}
-                className={`p-1.5 rounded-md border text-xs flex items-center gap-1 transition-all ${
-                  autoRotate 
-                    ? 'bg-accent/25 border-accent text-accent' 
-                    : 'border-white/10 text-gray-400 hover:text-white'
-                }`}
+                className={`p-1.5 rounded-md border text-xs flex items-center gap-1 transition-all ${autoRotate
+                  ? 'bg-accent/25 border-accent text-accent'
+                  : 'border-white/10 text-gray-400 hover:text-white'
+                  }`}
               >
                 <RotateCw size={12} className={autoRotate ? 'animate-spin' : ''} />
                 <span className="text-[10px] font-bold">Spin Mode</span>
@@ -290,7 +297,7 @@ export default function ProductDetails() {
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
+
               {/* Part selector swatches */}
               <div className="space-y-4">
                 {/* 3D Part: Main Body */}
@@ -363,11 +370,10 @@ export default function ProductDetails() {
                       <button
                         key={preset}
                         onClick={() => { setCameraPreset(preset); setAutoRotate(false); }}
-                        className={`py-2 rounded-lg text-xs font-black uppercase tracking-widest border transition-all ${
-                          cameraPreset === preset 
-                            ? 'bg-accent text-black border-accent shadow-md shadow-accent/15' 
-                            : 'border-white/10 text-gray-400 hover:text-white hover:bg-white/5'
-                        }`}
+                        className={`py-2 rounded-lg text-xs font-black uppercase tracking-widest border transition-all ${cameraPreset === preset
+                          ? 'bg-accent text-black border-accent shadow-md shadow-accent/15'
+                          : 'border-white/10 text-gray-400 hover:text-white hover:bg-white/5'
+                          }`}
                       >
                         {preset} Preset
                       </button>
@@ -386,13 +392,13 @@ export default function ProductDetails() {
 
         {/* RIGHT COLUMN: METADATA & PURCHASE FORM (5 Columns) */}
         <div className="lg:col-span-5 flex flex-col space-y-6">
-          
+
           {/* Main Info */}
           <div className="glass p-6 rounded-2xl border-white/5 space-y-4">
             <div>
               <span className="text-[10px] text-accent font-black tracking-widest uppercase">{product.category}</span>
               <h1 className="text-3xl font-black uppercase tracking-wider text-white mt-1">{product.name}</h1>
-              
+
               <div className="flex items-center gap-2 mt-2">
                 <div className="flex text-amber-400">
                   <Star size={14} className="fill-amber-400" />
@@ -413,7 +419,7 @@ export default function ProductDetails() {
 
           {/* Configuration Selection */}
           <div className="glass p-6 rounded-2xl border-white/5 space-y-6">
-            
+
             {/* Swatch color details */}
             <div className="space-y-2">
               <label className="text-[10px] text-gray-500 font-bold uppercase tracking-wider">
@@ -446,11 +452,10 @@ export default function ProductDetails() {
                   <button
                     key={sz}
                     onClick={() => setSelectedSize(sz)}
-                    className={`py-2 rounded-lg border text-xs font-bold transition-all ${
-                      selectedSize === sz
-                        ? 'bg-accent text-black border-accent'
-                        : 'border-white/10 hover:border-white/30 text-gray-400 hover:text-white'
-                    }`}
+                    className={`py-2 rounded-lg border text-xs font-bold transition-all ${selectedSize === sz
+                      ? 'bg-accent text-black border-accent'
+                      : 'border-white/10 hover:border-white/30 text-gray-400 hover:text-white'
+                      }`}
                   >
                     {sz}
                   </button>
@@ -489,11 +494,10 @@ export default function ProductDetails() {
                 <button
                   onClick={handleAddToCart}
                   disabled={product.stock === 0}
-                  className={`flex-1 py-3.5 rounded-full font-black uppercase text-xs tracking-widest transition-all ${
-                    product.stock === 0
-                      ? 'bg-red-950/20 text-red-500 border border-red-500/20 cursor-not-allowed'
-                      : 'bg-accent text-black hover:bg-accent/80 hover:shadow-lg hover:shadow-accent/15'
-                  }`}
+                  className={`flex-1 py-3.5 rounded-full font-black uppercase text-xs tracking-widest transition-all ${product.stock === 0
+                    ? 'bg-red-950/20 text-red-500 border border-red-500/20 cursor-not-allowed'
+                    : 'bg-accent text-black hover:bg-accent/80 hover:shadow-lg hover:shadow-accent/15'
+                    }`}
                 >
                   <ShoppingBag size={14} className="inline mr-2 -mt-0.5" />
                   {product.stock === 0 ? 'Out of Stock' : 'Add custom config'}
@@ -517,7 +521,7 @@ export default function ProductDetails() {
                 <Info size={13} className="text-accent" />
                 Technical Specifications
               </span>
-              
+
               <div className="grid grid-cols-1 gap-2 text-xs pt-1">
                 {Object.entries(product.specs).map(([key, val]) => (
                   <div key={key} className="flex justify-between py-1.5 border-b border-white/5">
@@ -535,7 +539,7 @@ export default function ProductDetails() {
 
       {/* REVIEWS SECTION */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 pt-10 border-t border-white/5">
-        
+
         {/* Submit Review (5 columns) */}
         <div className="lg:col-span-5 glass p-6 rounded-2xl border-white/5 space-y-4 h-fit">
           <h3 className="text-sm font-black uppercase tracking-wider text-white flex items-center gap-1.5">
@@ -551,7 +555,7 @@ export default function ProductDetails() {
                   {reviewSuccess}
                 </div>
               )}
-              
+
               <div className="space-y-1.5">
                 <label className="text-[10px] text-gray-500 font-bold uppercase">Star Rating</label>
                 <select

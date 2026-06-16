@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber';
 import { useGLTF } from '@react-three/drei';
 
 export default function Sneaker3D({
+  modelPath,
   bodyColor = '#111111',
   soleColor = '#00f0ff',
   lacesColor = '#ffffff',
@@ -13,8 +14,9 @@ export default function Sneaker3D({
 }) {
   const groupRef = useRef();
 
-  const { scene } = useGLTF('/models/adidas_sneakers.glb');
-
+  const { scene } = useGLTF(
+    modelPath || "/models/adidas_sneakers.glb"
+  );
   useEffect(() => {
     scene.traverse((child) => {
       if (!child.isMesh || !child.material) return;
@@ -54,17 +56,43 @@ export default function Sneaker3D({
         Math.sin(state.clock.getElapsedTime() * 1.5) * 0.05;
     }
   });
+  const modelSettings = {
+    "/models/adidas_sneakers.glb": {
+      scale: 5,
+      position: [0, -1.3, 0],
+      rotation: [0, Math.PI / 2, 0],
+    },
+    "/models/rtfkt_creator_one.glb": {
+      scale: 0.06,
+      position: [0, -1.5, 0],
+      rotation: [0, 0, 0],
+    },
 
+    "/models/basketball_shoe.glb": {
+      scale: 1,
+      position: [0, -1.0, 0],
+      rotation: [0, 0, 0],
+    },
+
+    "/models/free_shoe_model.glb": {
+      scale: 0.4,
+      position: [0, -1.0, 0],
+      rotation: [0, Math.PI / 2, 0],
+    },
+  };
+
+  const settings =
+    modelSettings[modelPath] ||
+    modelSettings["/models/adidas_sneakers.glb"];
   return (
     <group
       ref={groupRef}
-      scale={4}
-      position={[0, -1.3, 0]}
-      rotation={[0, Math.PI / 2, 0]}
+      scale={settings.scale}
+      position={settings.position}
+      rotation={settings.rotation}
     >
       <primitive object={scene} />
     </group>
   );
 }
-
 useGLTF.preload('/models/adidas_sneakers.glb');

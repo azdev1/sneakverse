@@ -59,6 +59,7 @@ function CameraController({ cameraPreset }) {
 }
 
 export default function Canvas3D({
+  modelPath,
   bodyColor,
   soleColor,
   lacesColor,
@@ -108,6 +109,7 @@ export default function Canvas3D({
         <Suspense fallback={null}>
           <group position={[0, 0.2, 0]}>
             <Sneaker3D
+              modelPath={modelPath}
               bodyColor={bodyColor}
               soleColor={soleColor}
               lacesColor={lacesColor}
