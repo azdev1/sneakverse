@@ -140,7 +140,7 @@ function ShopContent() {
     const fetchAllProducts = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch('http://localhost:5000/api/products');
+        const res = await fetch('https://sneakverse.onrender.com/api/products');
         if (!res.ok) throw new Error('API failed');
         const data = await res.json();
         setProducts(data);

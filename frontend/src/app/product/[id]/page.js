@@ -145,7 +145,7 @@ export default function ProductDetails() {
       setIsLoading(true);
       setErrorMsg(null);
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
+        const res = await fetch(`https://sneakverse.onrender.com/api/products/${id}`);
         if (!res.ok) throw new Error('Product not found');
         const data = await res.json();
 
@@ -178,7 +178,7 @@ export default function ProductDetails() {
 
   const fetchRelated = async (category) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/products?category=${encodeURIComponent(category)}`);
+      const res = await fetch(`https://sneakverse.onrender.com/api/products?category=${encodeURIComponent(category)}`);
       if (res.ok) {
         const data = await res.json();
         setRelated(data.filter(p => p._id !== id).slice(0, 3));
@@ -206,7 +206,7 @@ export default function ProductDetails() {
     }
 
     try {
-      const response = await fetch(`http://localhost:5000/api/products/${id}/reviews`, {
+      const response = await fetch(`https://sneakverse.onrender.com/api/products/${id}/reviews`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -223,7 +223,7 @@ export default function ProductDetails() {
       setReviewSuccess('Review submitted successfully!');
       setReviewComment('');
       // Reload product details to show new review
-      const updatedProductRes = await fetch(`http://localhost:5000/api/products/${id}`);
+      const updatedProductRes = await fetch(`https://sneakverse.onrender.com/api/products/${id}`);
       if (updatedProductRes.ok) {
         const updatedData = await updatedProductRes.json();
         setProduct(updatedData);

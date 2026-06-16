@@ -50,7 +50,7 @@ export default function Profile() {
     const fetchMyOrders = async () => {
       setIsLoadingOrders(true);
       try {
-        const res = await fetch('http://localhost:5000/api/orders/myorders', {
+        const res = await fetch('https://sneakverse.onrender.com/api/orders/myorders', {
           headers: { Authorization: `Bearer ${token}` }
         });
         if (!res.ok) throw new Error('Failed to load orders');

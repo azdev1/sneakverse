@@ -67,6 +67,7 @@ export default function Canvas3D({
   autoRotate = true,
   cameraPreset = 'side'
 }) {
+  console.log("Canvas3D modelPath =", modelPath);
   return (
     <div className="w-full h-full min-h-[300px] relative">
       <Canvas

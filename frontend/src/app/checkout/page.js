@@ -70,7 +70,7 @@ export default function Checkout() {
 
     try {
       // 1. Submit order
-      const orderRes = await fetch('http://localhost:5000/api/orders', {
+      const orderRes = await fetch('https://sneakverse.onrender.com/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -85,7 +85,7 @@ export default function Checkout() {
       }
 
       // 2. MOCK payment success immediately (PUT /api/orders/:id/pay)
-      const payRes = await fetch(`http://localhost:5000/api/orders/${orderData._id}/pay`, {
+      const payRes = await fetch(`https://sneakverse.onrender.com/api/orders/${orderData._id}/pay`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

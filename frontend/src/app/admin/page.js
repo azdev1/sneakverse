@@ -59,19 +59,19 @@ export default function AdminDashboard() {
     setIsLoading(true);
     try {
       // 1. Fetch products
-      const prodRes = await fetch('http://localhost:5000/api/products');
+      const prodRes = await fetch('https://sneakverse.onrender.com/api/products');
       const prodData = await prodRes.json();
       setProducts(prodData);
 
       // 2. Fetch orders
-      const orderRes = await fetch('http://localhost:5000/api/orders', {
+      const orderRes = await fetch('https://sneakverse.onrender.com/api/orders', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const orderData = await orderRes.json();
       setOrders(orderData);
 
       // 3. Fetch users
-      const usersRes = await fetch('http://localhost:5000/api/users', {
+      const usersRes = await fetch('https://sneakverse.onrender.com/api/users', {
         headers: { Authorization: `Bearer ${token}` }
       });
       const usersData = await usersRes.json();
@@ -114,7 +114,7 @@ export default function AdminDashboard() {
   const handleDeleteProduct = async (id) => {
     if (!confirm('Are you sure you want to delete this sneaker?')) return;
     try {
-      const res = await fetch(`http://localhost:5000/api/products/${id}`, {
+      const res = await fetch(`https://sneakverse.onrender.com/api/products/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });
@@ -146,11 +146,11 @@ export default function AdminDashboard() {
     };
 
     try {
-      let url = 'http://localhost:5000/api/products';
+      let url = 'https://sneakverse.onrender.com/api/products';
       let method = 'POST';
 
       if (editProductId) {
-        url = `http://localhost:5000/api/products/${editProductId}`;
+        url = `https://sneakverse.onrender.com/api/products/${editProductId}`;
         method = 'PUT';
       }
 
@@ -184,7 +184,7 @@ export default function AdminDashboard() {
   // Mark order as delivered
   const handleMarkDelivered = async (id) => {
     try {
-      const res = await fetch(`http://localhost:5000/api/orders/${id}/deliver`, {
+      const res = await fetch(`https://sneakverse.onrender.com/api/orders/${id}/deliver`, {
         method: 'PUT',
         headers: { Authorization: `Bearer ${token}` }
       });

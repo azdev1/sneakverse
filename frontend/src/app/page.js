@@ -120,7 +120,7 @@ export default function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch('http://localhost:5000/api/products');
+        const res = await fetch('https://sneakverse.onrender.com/api/products');
         if (!res.ok) throw new Error('Failed to load products');
         const data = await res.json();
         // Display isFeatured products or fall back
